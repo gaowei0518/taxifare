@@ -22,3 +22,9 @@ def root():
 def dummy(number: int):
     """Dummy endpoint that returns the square of the input number."""
     return {"result": number ** 2}
+
+# prediction endpoint
+@app.get("/predict")
+def predict():
+    """predict endpoint that returns the class of a pengium"""
+    return {"results":"AHAHAHAHa!!!"}
