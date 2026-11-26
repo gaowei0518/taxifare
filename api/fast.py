@@ -5,11 +5,12 @@ import os
 
 import pandas as pd
 from fastapi import FastAPI
+from src.taxifare.predict import load_model,predict
 
 # FastAPI instance
 app = FastAPI()
 
-MODEL_PATH = ""
+MODEL_PATH = "models/linreg_pipeline.joblib"
 
 
 # Root endpoint
@@ -43,8 +44,8 @@ def predict_fare_amount(pickup_datetime,pickup_longitude:float,
     }
     X_pred = pd.DataFrame(dic_map)
     #print(X_pred)
-    #model = load_model(MODEL_PATH)
-    predictions = [""] #predict(model,X_pred)
+    model = load_model(MODEL_PATH)
+    predictions = predict(model,X_pred)
 
 
     return {"amount": predictions[0]}
