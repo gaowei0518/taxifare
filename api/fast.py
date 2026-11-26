@@ -9,6 +9,8 @@ from fastapi import FastAPI
 # FastAPI instance
 app = FastAPI()
 
+MODEL_PATH = ""
+
 
 # Root endpoint
 @app.get("/")
@@ -25,6 +27,24 @@ def dummy(number: int):
 
 # prediction endpoint
 @app.get("/predict")
-def predict():
-    """predict endpoint that returns the class of a pengium"""
-    return {"results":"AHAHAHAHa!!!"}
+def predict_fare_amount(pickup_datetime,pickup_longitude:float,
+                        pickup_latitude:float,dropoff_longitude:float,
+                        dropoff_latitude:float,passenger_count:int):
+    """predict endpoint that returns fare amount of taxifare"""
+
+
+    dic_map = {
+    "pickup_datetime":[pickup_datetime],
+    "pickup_longitude":[pickup_longitude],
+    "pickup_latitude":[pickup_latitude],
+    "dropoff_longitude":[dropoff_longitude],
+    "dropoff_latitude":[dropoff_latitude],
+    "passenger_count":[passenger_count]
+    }
+    X_pred = pd.DataFrame(dic_map)
+    #print(X_pred)
+    #model = load_model(MODEL_PATH)
+    predictions = [""] #predict(model,X_pred)
+
+
+    return {"amount": predictions[0]}
