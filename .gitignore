@@ -13,3 +13,7 @@ wheels/
 # Saved models
 models/
 *.joblib
+
+
+#env
+.env
